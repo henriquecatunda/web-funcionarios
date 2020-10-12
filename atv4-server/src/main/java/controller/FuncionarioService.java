@@ -58,53 +58,62 @@ public class FuncionarioService extends HttpServlet {
             }
         }
         
+
         
-     // GET BY cargo
+        // GET BY cargo
         if (request.getParameter("cargo") != null) {
-        	Funcionario funcionario = FuncionarioDAO.getFuncionarioBycargo(request.getParameter("cargo"));
- 
-            if (funcionario != null) {
- 
-                JSONObject jsonObject = new JSONObject();
- 
-                jsonObject.put("id", funcionario.getId());
-                jsonObject.put("nome", funcionario.getNome());
-                jsonObject.put("cargo", funcionario.getCargo());
-                jsonObject.put("dataNascimento", funcionario.getDataNascimento());
-                jsonObject.put("dataEntradaEmpresa", funcionario.getDataEntradaEmpresa());
- 
- 
-                response.setContentType("application/json");
-                response.setCharacterEncoding("UTF-8");
-                response.getWriter().print(jsonObject.toString());
-                response.getWriter().flush();
-            }
-            return;
-        }      
-        
-     // GET BY cargo
-        if (request.getParameter("quantidade") != null) {
-        	Funcionario funcionario = FuncionarioDAO.getFuncionarioBycargo(request.getParameter("quantidade"));
- 
-            if (funcionario != null) {
- 
-                JSONObject jsonObject = new JSONObject();
- 
-                jsonObject.put("id", funcionario.getId());
-                jsonObject.put("nome", funcionario.getNome());
-                jsonObject.put("cargo", funcionario.getCargo());
-                jsonObject.put("dataNascimento", funcionario.getDataNascimento());
-                jsonObject.put("dataEntradaEmpresa", funcionario.getDataEntradaEmpresa());
- 
- 
-                response.setContentType("application/json");
-                response.setCharacterEncoding("UTF-8");
-                response.getWriter().print(jsonObject.toString());
-                response.getWriter().flush();
-            }
-            return;
-        }      
-        
+        	 List<Funcionario> usuarios = FuncionarioDAO.getFuncionarioByCargo(request.getParameter("cargo"));
+         	
+                 JSONArray jArray = new JSONArray();
+      
+                 for (Funcionario funcionario : usuarios) {
+                     JSONObject jsonObject = new JSONObject();
+      
+                     jsonObject.put("id", funcionario.getId());
+                     jsonObject.put("nome", funcionario.getNome());
+                     jsonObject.put("cargo", funcionario.getCargo());
+                     jsonObject.put("dataNascimento", funcionario.getDataNascimento());
+                     jsonObject.put("dataEntradaEmpresa", funcionario.getDataEntradaEmpresa());
+      
+                     jArray.put(jsonObject);
+                 }
+      
+                 response.setContentType("application/json");
+                 response.setCharacterEncoding("UTF-8");
+                 response.getWriter().print(jArray.toString());
+                 response.getWriter().flush();
+             
+                 
+           return;
+        }
+              
+             
+     // GET BY Quantidade
+        String quantidade = request.getParameter("quantidade");
+        if (quantidade != null) {
+        	 List<Funcionario> usuarios = FuncionarioDAO.getFuncionarioByQuantidade(Integer.parseInt(quantidade));
+         	         	 
+        	 JSONArray jArray = new JSONArray();
+             
+             for (Funcionario funcionario : usuarios) {
+                 JSONObject jsonObject = new JSONObject();
+  
+                 jsonObject.put("id", funcionario.getId());
+                 jsonObject.put("nome", funcionario.getNome());
+                 jsonObject.put("cargo", funcionario.getCargo());
+                 jsonObject.put("dataNascimento", funcionario.getDataNascimento());
+                 jsonObject.put("dataEntradaEmpresa", funcionario.getDataEntradaEmpresa());
+  
+                 jArray.put(jsonObject);
+             }
+  
+             response.setContentType("application/json");
+             response.setCharacterEncoding("UTF-8");
+             response.getWriter().print(jArray.toString());
+             response.getWriter().flush();
+                      
+       return;
+    }
       
         
         // GET ALL

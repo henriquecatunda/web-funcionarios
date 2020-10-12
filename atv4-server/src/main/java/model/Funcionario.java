@@ -7,8 +7,7 @@ public class Funcionario {
     String cargo;
     String dataNascimento;
     String dataEntradaEmpresa;
-    int quantidade;
-    
+  
 	public Funcionario(int id, String nome, String cargo, String dataNascimento, String dataEntradaEmpresa) {
 		super();
 		this.id = id;
@@ -63,15 +62,5 @@ public class Funcionario {
 	public void setDataEntradaEmpresa(String dataEntradaEmpresa) {
 		this.dataEntradaEmpresa = dataEntradaEmpresa;
 	}
-
-	public int getQuantidade() {
-		return quantidade;
-	}
-
-	public void setQuantidade(int quantidade) {
-		this.quantidade = quantidade;
-	}
 	
-	
-    
 }

@@ -32,28 +32,36 @@ public class FuncionarioDAO {
     
     
     
-    public static Funcionario getFuncionarioBycargo(String cargo) {
+    public static List<Funcionario> getFuncionarioByCargo(String cargo) {
         List<Funcionario> list = getAllFuncionarios();
-       
+        List<Funcionario> usuarios = new ArrayList<>();
         for (Funcionario funcionario : list) {
-            if(funcionario.getCargo().equals(cargo)) {            	      
-            	return funcionario;               	   
-            }
+            if(funcionario.getCargo().equals(cargo)) {  
+            	
+              
+              usuarios.add(funcionario);
+                             	   
+            } 
         }
  
-        return null;
+        return usuarios;
     }
     
-    public static Funcionario  getFuncionarioByQuantidade(int quantidade) {
+    
+    
+    public static  List<Funcionario> getFuncionarioByQuantidade(int quantidade) {
         List<Funcionario> list = getAllFuncionarios();
-       
-        for (Funcionario funcionario2 : list) {
-                     	      
-            	return funcionario2;          	   
-            
+        List<Funcionario> usuarios = new ArrayList<>();
+        
+        for (Funcionario funcionario : list) {
+        	 if(quantidade != 0 ) {       	      
+            	
+        		 usuarios.add(funcionario);
+        		 quantidade--;
+        	 }
         }
  
-        return null;
+        return usuarios;
     }
     
     public static Funcionario addFuncionario(String nome, String cargo, String dataNascimento, String dataEntradaEmpresa) {
