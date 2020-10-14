@@ -54,7 +54,7 @@ public class FuncionarioDAO {
         List<Funcionario> usuarios = new ArrayList<>();
         
         for (Funcionario funcionario : list) {
-        	 if(quantidade != 0 ) {       	      
+        	 if(quantidade > 0 ) {       	      
             	
         		 usuarios.add(funcionario);
         		 quantidade--;
