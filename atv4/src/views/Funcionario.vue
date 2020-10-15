@@ -16,17 +16,15 @@
           <button @click="putFuncionario()">Put Funcionario</button><br /><br />
           <button @click="deleteFuncionario()">Delete Funcionario</button><br /><br /> 
           </div>
-    
-    <p>{{funcionario }}</p> <br>
 
         <ul>
-            <li v-for="funcionario in funcionarios " :key="funcionario.id">
+            <li>
                 <div class="infor">
-                <p>{{ funcionario.id }}</p>
-                <p>{{ funcionario.nome }}</p>
-                <p>{{ funcionario.cargo }}</p>
-                <p>{{ funcionario.dataNascimento }}</p>
-                <p>{{ funcionario.dataEntradaEmpresa }}</p>
+                <p> Id: {{ funcionarios.id }}</p>
+                <p>Nome: {{ funcionarios.nome }}</p>
+                <p>Cargo: {{ funcionarios.cargo }}</p>
+                <p>DataNascimento: {{ funcionarios.dataNascimento }}</p>
+                <p>DataEntradaEmpresa: {{ funcionarios.dataEntradaEmpresa }}</p>
                 </div>
             </li>
         </ul>
@@ -47,40 +45,11 @@ export default {
       dataNascimento: "",
       dataEntrada: "",
       quantidade:"",
-      funcionario:{},
       funcionarios: [],
       baseURI:"http://localhost:8080/atv4-back-and/api/funcionarios",
     };
   },
   methods: {
-
-     fetchUsers(){
-      this.$http.get(this.baseURI ).then((result) => {
-         this.funcionarios = result.data;
-      });
-    },
-
-    buscarFuncionarioId(){
-      this.$http
-        .get(this.baseURI + "/" + this.id)
-        .then((result) => {
-          this.funcionario = result.data;
-        })
-        .catch(function(error) {
-          console.log(error);
-        });
-    },
-
-      buscarFuncionarioCargo() {
-      this.$http
-        .get(this.baseURI + "?cargo=" + this.cargo)
-        .then((result) => {
-          this.funcionario = result.data;
-        })
-        .catch(function(error) {
-          console.log(error);
-        });
-    },
 
      postFuncionario() {
       let obj = {
@@ -92,7 +61,7 @@ export default {
 
       this.$http.post(this.baseURI, obj).then((result) => {
         console.log(result);
-         this.funcionario  = result.data;
+         this.funcionarios  = result.data;
         //this.handleFileUpload(this.user.id);
       });
     },
@@ -107,7 +76,7 @@ export default {
 
       this.$http.put(this.baseURI + "/" + this.id, obj).then((result) => {
         console.log(result);
-        this.funcionario = result.data;
+        this.funcionarios = result.data;
         //this.handleFileUpload(this.user.id);
       });
     },

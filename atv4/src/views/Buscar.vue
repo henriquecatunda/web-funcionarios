@@ -7,6 +7,18 @@
           <h4>Mostrar todos os funcionario</h4>
           <button @click="fetchUsers()">Buscar Funcionarios</button><br /><br />
 
+          <ul>
+            <li v-for="funcionario in funcionarios " :key="funcionario.id">
+                <div class="infor">
+                <p> Id: {{ funcionario.id }}</p>
+                <p>Nome: {{ funcionario.nome }}</p>
+                <p>Cargo: {{ funcionario.cargo }}</p>
+                <p>DataNascimento: {{ funcionario.dataNascimento }}</p>
+                <p>DataEntradaEmpresa: {{ funcionario.dataEntradaEmpresa }}</p>
+                </div>
+            </li>
+        </ul>
+
         </div>
 
         <div>
@@ -14,6 +26,18 @@
           <p> Id: <input type="text" v-model="id" /><br /></p> 
           <button @click="buscarFuncionarioId()">Buscar Funcionarios By Id</button><br /><br />
 
+            <ul>  
+                     <li >
+                        <div class="infor">
+                        <p>Id: {{ funcionariosid.id }}</p>
+                        <p>Nome: {{ funcionariosid.nome }}</p>
+                        <p>Cargo: {{ funcionariosid.cargo }}</p>
+                        <p>DataNascimento: {{ funcionariosid.dataNascimento }}</p>
+                        <p>DataEntradaEmpresa: {{ funcionariosid.dataEntradaEmpresa }}</p>
+                         </div>
+                     </li>
+
+               </ul>
 
         </div>
          
@@ -22,31 +46,41 @@
              <p> Cargo: <input type="text" v-model="cargo" /><br /></p>
              <button @click="buscarFuncionarioCargo()">Buscar Funcionarios pelo cargo</button><br /><br />
 
+              <ul>  
+                     <li  v-for="funcionario in funcionariosC " :key="funcionario.id" >
+                        <div class="infor">
+                        <p>Id:{{ funcionario.id }}</p>
+                        <p>Nome: {{ funcionario.nome }}</p>
+                        <p>Cargo: {{ funcionario.cargo }}</p>
+                        <p>DataNascimento: {{ funcionario.dataNascimento }}</p>
+                        <p>DataEntradaEmpresa: {{ funcionario.dataEntradaEmpresa }}</p>
+                         </div>
+                     </li>
 
+               </ul>
        </div>
 
        <div>
             <h4>Filtrar por quantidade de funcionario</h4>
             Quantidade: <input type="number" name="quantidade" id="" v-model="quantidade" /><br /><br /><br>
              <button @click="buscarFuncionarioQuant()">Buscar Funcionarios por quant.</button><br /><br />
+
+              <ul>  
+
+                     <li  v-for="funcionarioQ in funcionariosQuan " :key="funcionarioQ.id">
+                        <div class="infor">
+                        <p>Id:{{ funcionarioQ.id }}</p>
+                        <p>Nome: {{ funcionarioQ.nome }}</p>
+                        <p>Cargo: {{ funcionarioQ.cargo }}</p>
+                        <p>DataNascimento: {{ funcionarioQ.dataNascimento }}</p>
+                        <p>DataEntradaEmpresa: {{ funcionarioQ.dataEntradaEmpresa }}</p>
+                         </div>
+                     </li>
+               </ul>
         </div>
 
     </div>
-
-    <p>{{funcionario }}</p> <br>
-
-        <ul>
-            <li v-for="funcionario in funcionarios " :key="funcionario.id">
-                <div class="infor">
-                <p>{{ funcionario.id }}</p>
-                <p>{{ funcionario.nome }}</p>
-                <p>{{ funcionario.cargo }}</p>
-                <p>{{ funcionario.dataNascimento }}</p>
-                <p>{{ funcionario.dataEntradaEmpresa }}</p>
-                </div>
-            </li>
-        </ul>
-        
+      
    </div>
 
 
@@ -63,8 +97,10 @@ export default {
       dataNascimento: "",
       dataEntrada: "",
       quantidade: 0,
-      funcionario:{},
       funcionarios: [],
+      funcionariosid:[],
+      funcionariosC:[],
+      funcionariosQuan:[],
       baseURI:"http://localhost:8080/atv4-back-and/api/funcionarios",
     };
   },
@@ -80,7 +116,7 @@ export default {
       this.$http
         .get(this.baseURI + "/" + this.id)
         .then((result) => {
-          this.funcionario = result.data;
+          this.funcionariosid = result.data;
         })
         .catch(function(error) {
           console.log(error);
@@ -91,7 +127,7 @@ export default {
       this.$http
         .get(this.baseURI + "?cargo=" + this.cargo)
         .then((result) => {
-          this.funcionario = result.data;
+          this.funcionariosC = result.data;
         })
         .catch(function(error) {
           console.log(error);
@@ -102,7 +138,7 @@ export default {
       this.$http
         .get(this.baseURI + "?quantidade=" + this.quantidade)
         .then((result) => {
-          this.funcionario = result.data;
+          this.funcionariosQuan = result.data;
         })
         .catch(function(error) {
           console.log(error);
@@ -120,8 +156,7 @@ export default {
 
 .Campos {
     margin: auto;
-    font-weight: 600;
-    width: 40%;
+    width: 80%;
         
 }
 
@@ -137,11 +172,12 @@ button{
 .infor {
 
     display: flex;
-    justify-content: center;
+   
 }
 
 .infor p {
     margin: 10px 10px;
+    
     
 }
 
