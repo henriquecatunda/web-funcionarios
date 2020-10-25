@@ -46,7 +46,7 @@ export default {
       dataEntrada: "",
       quantidade:"",
       funcionarios: [],
-      baseURI:"http://localhost:8080/atv4-back-and/api/funcionarios",
+      baseURI:"http://localhost:8080/api/funcionarios",
     };
   },
   methods: {

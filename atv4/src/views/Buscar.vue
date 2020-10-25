@@ -101,7 +101,7 @@ export default {
       funcionariosid:[],
       funcionariosC:[],
       funcionariosQuan:[],
-      baseURI:"http://localhost:8080/atv4-back-and/api/funcionarios",
+      baseURI:"http://localhost:8080/api/funcionarios",
     };
   },
   methods: {
@@ -125,7 +125,7 @@ export default {
 
       buscarFuncionarioCargo() {
       this.$http
-        .get(this.baseURI + "?cargo=" + this.cargo)
+        .get(this.baseURI + "/searchCargo?cargo=" + this.cargo)
         .then((result) => {
           this.funcionariosC = result.data;
         })
@@ -136,7 +136,7 @@ export default {
 
       buscarFuncionarioQuant() {
       this.$http
-        .get(this.baseURI + "?quantidade=" + this.quantidade)
+        .get(this.baseURI + "/searchQuantidade?quantidade=" + this.quantidade)
         .then((result) => {
           this.funcionariosQuan = result.data;
         })
